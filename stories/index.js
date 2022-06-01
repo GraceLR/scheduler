@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment }  from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -154,7 +154,23 @@ storiesOf("Appointment", module)
   .add("Confirm onCancel", () => <Confirm student="GLR" message="Delete the appointment?" onCancel={action("onCancel")} />)
   .add("Confirm onDelete", () => <Confirm student="GLR" message="Delete the appointment?" onConfirm={action("onConfirm")} />)
   .add("Form Edit", () => <Form student="GLR" interviewer={interviewer} interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />)
-  .add("Form Create", () => <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />);
+  .add("Form Create", () => <Form interviewers={interviewers} onSave={action("onSave")} onCancel={action("onCancel")} />)
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ));
 
 storiesOf("Status", module)
   .addParameters({

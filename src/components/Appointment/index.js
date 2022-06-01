@@ -5,7 +5,7 @@ import Show from "./Show";
 
 import "./styles.scss";
 
-export default function Appointment({time, interview}) {
+export default function Appointment({id, time, interview}) {
     return(
         <article className="appointment">
             <Header time={time}/>

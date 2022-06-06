@@ -11,19 +11,8 @@ export default function Application() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
-  });
-  const appointments = getAppointmentsForDay(state, state.day);
-  const schedule = appointments.map((appointment) => {
-    const interview = getInterview(state, appointment.interview);
-    return (
-      <Appointment
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
+    appointments: {},
+    interviewers: {}
   });
   useEffect(() => {
     Promise.all([
@@ -34,6 +23,19 @@ export default function Application() {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     });
   }, []);
+  const appointments = getAppointmentsForDay(state, state.day);
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interviewers={state.interviewers}
+        interview={interview}
+      />
+    );
+  });
   return (
     <main className="layout">
       <section className="sidebar">

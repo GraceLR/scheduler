@@ -4,7 +4,7 @@ import InterviewerListItem from "components/InterviewerListItem";
 import "components/InterviewerList.scss";
 
 export default function InterviewerList({interviewers, value, onChange}){
-    const InterviewerListItems = interviewers.map(interviewer => {
+    const InterviewerListItems = Object.values(interviewers).map(interviewer => {
       return (
         <InterviewerListItem
           key={interviewer.id}

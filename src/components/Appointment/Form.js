@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Button from "../Button";
 import InterviewerList from "../InterviewerList";
 
-export default function Form(props) {
-    const [student, setStudent] = useState(props.student || "");
-    const [interviewer, setInterviewer] = useState(props.interviewer || null);
+export default function Form({studentProp, interviewers, interviewerProp, onCancel}) {
+    const [student, setStudent] = useState(studentProp || "");
+    const [interviewer, setInterviewer] = useState(interviewerProp || null);
     const reset = () => {
         setStudent("");
         setInterviewer(null);
     };
     const cancel = () => {
         reset();
-        props.onCancel();
+        onCancel();
     };
     return(
         <main className="appointment__card appointment__card--create">
@@ -27,7 +27,7 @@ export default function Form(props) {
                 />
             </form>
             <InterviewerList 
-            interviewers={props.interviewers}
+            interviewers={interviewers}
             value={interviewer ? interviewer.id : null}
             onChange={(selectedInterviewer) => {setInterviewer(selectedInterviewer)}}
             />

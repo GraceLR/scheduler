@@ -11,6 +11,7 @@ import Error from "./Error";
 import useVisualMode from "../../hooks/useVisualMode";
 
 import "./styles.scss";
+import { TRUE } from "sass";
 
 export default function Appointment({id, time, interviewers, interview, bookInterview, cancelInterview}) {
     const EMPTY = "EMPTY";
@@ -30,12 +31,14 @@ export default function Appointment({id, time, interviewers, interview, bookInte
       student: name,
       interviewer: interviewer.id
     };
-    bookInterview(id, interview, from);
     transition(SAVING);
     axios.put('/api/appointments/' + id, {interview})
-    .then(() => transition(SHOW))
+    .then(() => {
+        bookInterview(id, interview, from);
+        transition(SHOW);
+    })
     .catch(err => {
-        transition(ERROR_SAVE);
+        transition(ERROR_SAVE, true);
       });
   };
   const onCancel = () => {
@@ -45,16 +48,19 @@ export default function Appointment({id, time, interviewers, interview, bookInte
     transition(CONFIRMING);
   };
   const onConfirm = id => {
-    cancelInterview(id);
-    transition(DELETING);
+    transition(DELETING, true);
     axios.delete('/api/appointments/' + id)
-    .then(() => transition(EMPTY))
+    .then(() => {
+        cancelInterview(id);
+        transition(EMPTY);
+    })
     .catch(err => {
-        transition(ERROR_DELETE);
+        transition(ERROR_DELETE, true);
       });
   };
   const onClose = () => {
       back();
+    //   back();
   };
   const onEdit = () => {
     transition(EDITING);

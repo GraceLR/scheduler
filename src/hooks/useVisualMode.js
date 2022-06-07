@@ -18,10 +18,10 @@ export default function useVisualMode(initial) {
         },
         back: () => {
             if (history.length > 1) {
-                setHistory(prev => {
-                    prev.pop();
-                    setMode(_prev => prev[prev.length - 1]);
-                    return [...prev];
+                setHistory(prevHistory => {
+                    prevHistory.pop();
+                    setMode(_prev => prevHistory[prevHistory.length - 1]);
+                    return [...prevHistory];
                 });
             }
             return { mode };

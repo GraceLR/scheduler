@@ -18,6 +18,7 @@ export default function Appointment({id, time, interviewers, interview, bookInte
     const SAVING = "SAVING";
     const CONFIRMING = "CONFIRMING";
     const DELETING = "DELETING";
+    const EDITING = "EDITING";
     const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
@@ -43,16 +44,19 @@ export default function Appointment({id, time, interviewers, interview, bookInte
     axios.delete('/api/appointments/' + id)
     .then(() => transition(EMPTY));
   };
+  const onEdit = id => {
+    transition(EDITING);
+  };
     return(
         <article className="appointment">
             <Header time={time}/>
             {mode === "EMPTY" && <Empty onAdd={() => transition(CREATE)} />}
-            {mode === "SHOW" && <Show student={interview.student} interviewer={interview.interviewer} onDelete={() => onDelete()} />}
-            {mode === "CREATE" && <Form interviewers={interviewers} onCancel={() => back()} onSave={save}/>}
+            {mode === "SHOW" && <Show student={interview.student} interviewer={interview.interviewer} onDelete={() => onDelete()} onEdit={() => onEdit(id)} />}
+            {mode === "CREATE" && <Form interviewers={interviewers} onCancel={() => back()} onSave={save} />}
             {mode === "SAVING" && <Status message="Saving"/>}
             {mode === "CONFIRMING" && <Confirm message="Are you sure you would like to delete?" onCancel={() => onCancel()} onConfirm={() => onConfirm(id)} />}
             {mode === "DELETING" && <Status message="Deleting"/>}
-            {/* {mode === "DELETING" && <Status message="DELETING"/>} */}
+            {mode === "EDITING" && <Form studentProp={interview.student} interviewerProp={interview.interviewer} interviewers={interviewers} onCancel={() => back()} onSave={save} />}
         </article> 
     )
 };

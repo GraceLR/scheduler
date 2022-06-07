@@ -5,6 +5,7 @@ import InterviewerList from "../InterviewerList";
 export default function Form({studentProp, interviewers, interviewerProp, onCancel, onSave}) {
     const [student, setStudent] = useState(studentProp || "");
     const [interviewer, setInterviewer] = useState(interviewerProp || null);
+    const from = studentProp ? 'EDITINH' : 'CREATE';
     const reset = () => {
         setStudent("");
         setInterviewer(null);
@@ -35,7 +36,7 @@ export default function Form({studentProp, interviewers, interviewerProp, onCanc
         <section className="appointment__card-right">
             <section className="appointment__actions">
             <Button danger onClick={cancel}>Cancel</Button>
-            <Button confirm onClick={() => onSave(student, interviewer)}>Save</Button>
+            <Button confirm onClick={() => onSave(student, interviewer, from)}>Save</Button>
             </section>
         </section>
         </main>

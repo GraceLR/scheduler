@@ -22,12 +22,12 @@ export default function Appointment({id, time, interviewers, interview, bookInte
     const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
-  const save = (name, interviewer) => {
+  const save = (name, interviewer, from) => {
     const interview = {
       student: name,
       interviewer: interviewer.id
     };
-    bookInterview(id, interview);
+    bookInterview(id, interview, from);
     transition(SAVING);
     axios.put('/api/appointments/' + id, {interview})
     .then(() => transition(SHOW));

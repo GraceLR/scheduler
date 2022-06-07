@@ -41,12 +41,6 @@ export default function Appointment({id, time, interviewers, interview, bookInte
         transition(ERROR_SAVE, true);
       });
   };
-  const onCancel = () => {
-      back();
-  }
-  const onDelete = () => {
-    transition(CONFIRMING);
-  };
   const onConfirm = id => {
     transition(DELETING, true);
     axios.delete('/api/appointments/' + id)
@@ -58,25 +52,18 @@ export default function Appointment({id, time, interviewers, interview, bookInte
         transition(ERROR_DELETE, true);
       });
   };
-  const onClose = () => {
-      back();
-    //   back();
-  };
-  const onEdit = () => {
-    transition(EDITING);
-  };
     return(
         <article className="appointment">
             <Header time={time}/>
             {mode === "EMPTY" && <Empty onAdd={() => transition(CREATE)} />}
-            {mode === "SHOW" && <Show student={interview.student} interviewer={interview.interviewer} onDelete={() => onDelete()} onEdit={() => onEdit()} />}
+            {mode === "SHOW" && <Show student={interview.student} interviewer={interview.interviewer} onDelete={() => transition(CONFIRMING)} onEdit={() => transition(EDITING)} />}
             {mode === "CREATE" && <Form interviewers={interviewers} onCancel={() => back()} onSave={save} />}
             {mode === "SAVING" && <Status message="Saving"/>}
-            {mode === "CONFIRMING" && <Confirm message="Are you sure you would like to delete?" onCancel={() => onCancel()} onConfirm={() => onConfirm(id)} />}
+            {mode === "CONFIRMING" && <Confirm message="Are you sure you would like to delete?" onCancel={() => back()} onConfirm={() => onConfirm(id)} />}
             {mode === "DELETING" && <Status message="Deleting"/>}
             {mode === "EDITING" && <Form studentProp={interview.student} interviewerProp={interview.interviewer} interviewers={interviewers} onCancel={() => back()} onSave={save} />}
-            {mode === "ERROR_SAVE" && <Error message="ERROR_SAVE" onClose={() => onClose()} />}
-            {mode === "ERROR_DELETE" && <Error message="ERROR_DELETE" onClose={() => onClose()} />}
+            {mode === "ERROR_SAVE" && <Error message="ERROR_SAVE" onClose={() => back()} />}
+            {mode === "ERROR_DELETE" && <Error message="ERROR_DELETE" onClose={() => back()} />}
         </article> 
     )
 };

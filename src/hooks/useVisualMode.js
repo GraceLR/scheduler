@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 export default function useVisualMode(initial) {
     const [mode, setMode] = useState(initial);
     const [history, setHistory] = useState([initial]);
-  
     return { 
         mode, 
         transition: (newMode, replace = false) => {

@@ -25,7 +25,7 @@ export default function Application() {
   }, []);
   const bookInterview = (id, interview, from) => {
     const days = [...state.days].map(day => {
-      if (day.appointments.includes(id) && from === 'EDITING') {
+      if (day.appointments.includes(id) && from === 'CREATE') {
         day.spots--;
       }
       return day;

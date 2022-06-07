@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import InterviewerList from "../InterviewerList";
 
-export default function Form({studentProp, interviewers, interviewerProp, onCancel}) {
+export default function Form({studentProp, interviewers, interviewerProp, onCancel, onSave}) {
     const [student, setStudent] = useState(studentProp || "");
     const [interviewer, setInterviewer] = useState(interviewerProp || null);
     const reset = () => {
@@ -35,7 +35,7 @@ export default function Form({studentProp, interviewers, interviewerProp, onCanc
         <section className="appointment__card-right">
             <section className="appointment__actions">
             <Button danger onClick={cancel}>Cancel</Button>
-            <Button confirm >Save</Button>
+            <Button confirm onClick={() => onSave(student, interviewer)}>Save</Button>
             </section>
         </section>
         </main>

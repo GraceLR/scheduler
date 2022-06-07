@@ -27,6 +27,11 @@ export default function Application() {
     const appointment = {...state.appointments[id], interview: { ...interview }};
     setState(prev => ({...prev, appointments: {...prev.appointments, [id]: appointment}}));
   };
+  const cancelInterview = id => {
+    let appointmentsnew = {...state.appointments};
+    appointmentsnew[id].interview = null;
+    setState(prev => ({...prev, appointments: appointmentsnew}));
+  };
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const schedule = appointments.map((appointment) => {
@@ -39,6 +44,7 @@ export default function Application() {
         interviewers={interviewers}
         interview={interview}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });

@@ -30,5 +30,5 @@ npm run cypress
 
 ## Final Product
 
-!["Screenshot of Monday"](https://user-images.githubusercontent.com/91842219/146063400-c628397f-65ba-4f70-bdac-d20625a9af4e.png)
-!["Screenshot of Edit page"](https://user-images.githubusercontent.com/91842219/146063462-cae5e68c-961e-4113-b7ef-a1a5e1e9424f.png)
+!["Screenshot of Monday"](https://raw.githubusercontent.com/GraceLR/scheduler/master/screenshots/Screen%20Shot%202022-06-15%20at%207.53.44%20PM.png)
+!["Screenshot of Edit page"](https://raw.githubusercontent.com/GraceLR/scheduler/master/screenshots/Screen%20Shot%202022-06-15%20at%207.54.07%20PM.png)

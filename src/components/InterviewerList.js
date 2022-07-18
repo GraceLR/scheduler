@@ -29,7 +29,7 @@ function InterviewerList({ interviewers, value, onChange }) {
 }
 
 InterviewerList.propTypes = {
-  interviewers: PropTypes.array.isRequired,
+  interviewers: PropTypes.object.isRequired,
 };
 
 export default InterviewerList;

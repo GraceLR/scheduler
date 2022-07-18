@@ -37,10 +37,10 @@ export default function Appointment({
       interviewer: interviewer.id,
     };
     transition(SAVING);
-    bookInterview(id, interview, from);
     axios
       .put("/api/appointments/" + id, { interview })
       .then(() => {
+        bookInterview(id, interview, from);
         transition(SHOW);
       })
       .catch((err) => {
@@ -49,10 +49,10 @@ export default function Appointment({
   };
   const onConfirm = (id) => {
     transition(DELETING, true);
-    cancelInterview(id);
     axios
       .delete("/api/appointments/" + id)
       .then(() => {
+        cancelInterview(id);
         transition(EMPTY);
       })
       .catch((err) => {
